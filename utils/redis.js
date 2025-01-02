@@ -7,6 +7,8 @@ class RedisClient {
     this.client.on('error', (err) => console.log('Redis Client Error', err));
 
     this.getAsync = promisify(this.client.GET).bind(this.client);
+    this.setAsync = promisify(this.client.SETEX).bind(this.client);
+    this.delAsync = promisify(this.client.DEL).bind(this.client);
   }
 
   isAlive() {
@@ -18,13 +20,11 @@ class RedisClient {
   }
 
   async set(key, value, duration) {
-    await this.client.set(key, value, {
-      EX: duration,
-    });
+    await this.setAsync(key, duration, value);
   }
 
   async del(key) {
-    await this.client.del(key);
+    await this.delAsync(key);
   }
 }
 
