@@ -12,7 +12,7 @@ class RedisClient {
   }
 
   async get(key) {
-    return await this.client.get(key);
+    return this.client.get(key);
   }
 
   async set(key, value, duration) {
