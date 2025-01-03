@@ -28,12 +28,11 @@ export default class UsersController {
     const id = await redisClient.get(key);
 
     if (!id) {
-      res.status(401).json({ error: 'Unauthorized' });
-      return;
+      return res.status(401).json({ error: 'Unauthorized' });
     }
 
     const { email } = await dbClient.getUser({ _id: ObjectId(id) });
 
-    res.json({ id, email });
+    return res.json({ id, email });
   }
 }
