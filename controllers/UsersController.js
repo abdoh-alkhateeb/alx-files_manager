@@ -1,5 +1,6 @@
 import { ObjectId } from 'mongodb';
 import dbClient from '../utils/db';
+import redisClient from '../utils/redis';
 
 export default class UsersController {
   static async postNew(req, res) {
