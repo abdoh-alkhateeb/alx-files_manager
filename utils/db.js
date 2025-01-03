@@ -35,7 +35,7 @@ class DBClient {
   }
 
   async getUser(email) {
-    await this.client.db().collection('users').find({ email }).toArray()[0];
+    return this.client.db().collection('users').findOne({ email });
   }
 }
 
