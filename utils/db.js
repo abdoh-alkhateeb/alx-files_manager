@@ -34,8 +34,8 @@ class DBClient {
     ).insertedId;
   }
 
-  async getUser(email) {
-    return this.client.db().collection('users').findOne({ email });
+  async getUser(filter) {
+    return this.client.db().collection('users').findOne(filter);
   }
 }
 
