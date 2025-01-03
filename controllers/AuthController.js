@@ -8,15 +8,14 @@ export default class AuthController {
     const authorization = req.headers.Authorization;
     const credentials = authorization ? authorization.split(' ')[1] : null;
 
-    let decodedCredentials;
+    if (!credentials) {
+      return res.status(401).json({ error: 'Unauthorized' });
+    }
 
+    let decodedCredentials;
     try {
       decodedCredentials = Buffer.from(credentials, 'base64').toString('utf-8');
     } catch (error) {
-      decodedCredentials = null;
-    }
-
-    if (!decodedCredentials) {
       return res.status(401).json({ error: 'Unauthorized' });
     }
 
