@@ -10,6 +10,7 @@ export default class UsersController {
       res.status(400).json({ error: 'Missing password' });
     } else {
       const user = dbClient.getUser(email);
+      console.log(user);
       if (user) {
         res.status(400).json({ error: 'Already exist' });
       } else {
