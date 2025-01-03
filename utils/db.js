@@ -1,4 +1,5 @@
 import { MongoClient } from 'mongodb';
+import sha1 from 'sha1';
 
 class DBClient {
   constructor() {
@@ -22,6 +23,19 @@ class DBClient {
 
   async nbFiles() {
     return this.client.db().collection('files').countDocuments();
+  }
+
+  async createUser(email, password) {
+    return (
+      await this.client
+        .db()
+        .collection('users')
+        .insertOne({ email, password: sha1(password) })
+    ).insertedId;
+  }
+
+  async getUser(email) {
+    await this.client.db().collection('users').find({ email }).toArray()[0];
   }
 }
 
