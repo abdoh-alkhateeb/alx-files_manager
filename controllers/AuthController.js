@@ -11,7 +11,7 @@ export default class AuthController {
     let decodedCredentials;
 
     try {
-      decodedCredentials = atob(credentials).split(':');
+      decodedCredentials = Buffer.from(credentials, 'base64').toString('utf-8');
     } catch (error) {
       decodedCredentials = null;
     }
@@ -20,7 +20,7 @@ export default class AuthController {
       return res.status(401).json({ error: 'Unauthorized' });
     }
 
-    const [email, password] = decodedCredentials;
+    const [email, password] = decodedCredentials.split(':');
 
     const user = await dbClient.getUser({ email, password: sha1(password) });
 
