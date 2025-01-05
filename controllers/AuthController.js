@@ -5,7 +5,8 @@ import redisClient from '../utils/redis';
 
 export default class AuthController {
   static async getConnect(req, res) {
-    let email, password;
+    let email;
+    let password;
 
     try {
       const authorization = req.headers.Authorization;
@@ -14,7 +15,10 @@ export default class AuthController {
         'utf-8'
       );
 
-      [email, password] = decodedCredentials.split(':');
+      const data = decodedCredentials.split(':');
+
+      email = data[0];
+      password = data[1];
     } catch (error) {
       res.status(401).json({ error: 'Unauthorized' });
       return false;
