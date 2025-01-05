@@ -15,12 +15,9 @@ export default class AuthController {
         'utf-8'
       );
 
-      const data = decodedCredentials.split(':');
-
-      email = data[0];
-      password = data[1];
+      [email, password] = decodedCredentials.split(':');
     } catch (error) {
-      res.status(401).json({ error: 'Unauthorized+' });
+      res.status(401).json({ error: 'Unauthorized' });
       return false;
     }
 
