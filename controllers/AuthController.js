@@ -49,7 +49,7 @@ export default class AuthController {
 
     await redisClient.del(key);
 
-    res.status(204).send();
+    res.status(204).end();
     return true;
   }
 }
