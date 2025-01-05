@@ -9,7 +9,7 @@ export default class AuthController {
     let password;
 
     try {
-      const authorization = req.headers.Authorization;
+      const authorization = req.header('Authorization');
       const credentials = authorization.trim().split(' ')[1];
       const decodedCredentials = Buffer.from(credentials, 'base64').toString(
         'utf-8'
