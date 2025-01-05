@@ -32,7 +32,7 @@ export default class AuthController {
 
     await redisClient.set(key, user._id.toString(), 24 * 3600);
 
-    res.json({ token });
+    res.status(200).json({ token });
     return true;
   }
 
