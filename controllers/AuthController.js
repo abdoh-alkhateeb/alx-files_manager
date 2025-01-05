@@ -20,7 +20,7 @@ export default class AuthController {
       email = data[0];
       password = data[1];
     } catch (error) {
-      res.status(401).json({ error: 'Unauthorized' });
+      res.status(401).json({ error: 'Unauthorized+' });
       return false;
     }
 
@@ -36,7 +36,7 @@ export default class AuthController {
 
     await redisClient.set(key, user._id.toString(), 24 * 3600);
 
-    res.status(200).json({ token });
+    res.json({ token });
     return true;
   }
 
